@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6VFCP2LYR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        if (!["localhost", "127.0.0.1", "::1"].includes(location.hostname)) {
+            gtag("js", new Date());
+            gtag("config", "G-G6VFCP2LYR");
+        }
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍🎨</text></svg>" />
+    <title>Stable Canvas - ai painting better</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+        html {
+            font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+                Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+                "Noto Color Emoji";
+            height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        .background-radial-gradient {
+            background-color: hsl(218, 41%, 15%);
+            background-image: radial-gradient(650px circle at 0% 0%,
+                    hsl(218, 41%, 35%) 15%,
+                    hsl(218, 41%, 30%) 35%,
+                    hsl(218, 41%, 20%) 75%,
+                    hsl(218, 41%, 19%) 80%,
+                    transparent 100%),
+                radial-gradient(1250px circle at 100% 100%,
+                    hsl(218, 41%, 45%) 15%,
+                    hsl(218, 41%, 30%) 35%,
+                    hsl(218, 41%, 20%) 75%,
+                    hsl(218, 41%, 19%) 80%,
+                    transparent 100%);
+        }
+
+        body {
+            color: white;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            /* Since CSS 2.1 */
+            white-space: -moz-pre-wrap;
+            /* Mozilla, since 1999 */
+            white-space: -pre-wrap;
+            /* Opera 4-6 */
+            white-space: -o-pre-wrap;
+            /* Opera 7 */
+            word-wrap: break-word;
+            /* Internet Explorer 5.5+ */
+        }
+
+        .code-block {
+            word-break: break-all;
+            background-color: rgba(64, 64, 64);
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 0.2rem;
+        }
+    </style>
+</head>
+
+<body class="background-radial-gradient">
+    <section class="text-white-600 body-font">
+        <div class="container px-5 py-24 mx-auto flex flex-col">
+            <div class="lg:w-4/6 mx-auto">
+                <!-- header -->
+                <div class="lg:w-4/6 mx-auto flex items-center justify-between">
+                    <a class="flex items-center text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
+                        href="#">
+                        👨‍🎨Stable<span
+                            class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-purple-500">Canvas</span>
+                    </a>
+
+                    <div class="flex w-1/2 justify-end content-center">
+                        <a class="inline-block text-white-300 no-underline hover:text-underline text-center h-10 p-2 md:h-auto md:p-4 transform duration-300 ease-in-out hover:opacity-75"
+                            href="https://github.com/StableCanvas/StableCanvas"
+                            title="github.com/StableCanvas/StableCanvas" target="_blank">
+                            <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32">
+                                <path fill-rule="evenodd" fill="currentColor"
+                                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- showcase -->
+                <div class="rounded-lg overflow-hidden mt-10">
+                    <iframe class="mx-auto w-full transform relative shadow-xl"
+                        src="https://www.youtube.com/embed?listType=playlist&list=PLNaPKZgVE2TxkO2rc7mvXCNuTLS-uxQ6j&autoplay=0&cc_load_policy=1&iv_load_policy=3&disablekb=1"
+                        title="showcase" frameborder="0" height="512"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+                <!-- content -->
+                <div class="flex flex-col sm:flex-row mt-10">
+                    <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
+                        <div class="flex flex-col items-center text-center justify-center">
+                            <h2 class="font-medium title-font mt-4 text-white-900 text-lg">
+                                Join Discord
+                            </h2>
+                            <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4"></div>
+                            <iframe class="w-full" src="https://discord.com/widget?id=1075240732820000769&theme=dark"
+                                height="500" allowtransparency="true" frameborder="0"
+                                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                        </div>
+                    </div>
+                    <div
+                        class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+                        <p class="leading-relaxed text-lg mb-4">
+                        <pre class="break-all">
+👋 Hello bros, I have released a tool (website) for AI painting: Stable Canvas 🎨. It is a tool designed specifically for AI drawing 🤖. it can be accessed directly from your browser without the need to download or install any software 🌐.
+I originally developed it for my own convenience 🤫, but we feel this tool can help more people, so now I'm excited to share it with the community 🤩.
+Of course, I have to say, the UI looks pretty ugly 😅, but it works! Try it~ 💪
+
+If it is used locally, the usage is very simple. Run the local web UI program with parameters:
+                </pre>
+                        <p class="code-block">
+                            --api --cors-allow-origins="https://beta.stablecanvas.com"
+                        </p>
+                        <pre>
+
+then you can start creating as I did in the demo video 🎥.
+Tips: recommend using inpainting model 🤔
+                </pre>
+                        </p>
+                        <a href="https://beta.stablecanvas.com/" class="text-indigo-200 inline-flex items-center hover:underline cursor-pointer">Quick Art Start
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- footer -->
+                <div class="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
+                    <a class="text-white/80 no-underline hover:no-underline" href="#">&copy; App
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>
+                        -
+                    </a>
+                    <a class="text-white/80 no-underline hover:no-underline"
+                        href="javascript:void(0)">StableCanvas.com</a>
+                </div>
+
+                <!-- content end -->
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
