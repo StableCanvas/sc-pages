@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to StableCanvas</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨‍🎨</text></svg>"
+    />
+    <link
+      href="
+https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown.min.css
+"
+      rel="stylesheet"
+    />
+    <script type="importmap">
+      {
+        "imports": {
+          "marked": "https://cdn.jsdelivr.net/npm/marked@12.0.2/+esm"
+        }
+      }
+    </script>
+    <style>
+      :root {
+        box-sizing: border-box;
+
+        --borderColor-default: #30363d;
+        --body-font-size: 14px;
+        --fgColor-default: #24292e;
+        --color-fg-default: #24292e;
+        --control-transparent-bgColor-hover: #b1bac41f;
+        --color-action-list-item-default-hover-bg: #b1bac41f;
+      }
+      * {
+        box-sizing: inherit;
+      }
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .markdown-body {
+        padding: 32px 16px;
+      }
+      .sc-scrollbar::-webkit-scrollbar {
+        width: 8px;
+      }
+      .sc-scrollbar::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+      .sc-scrollbar::-webkit-scrollbar-thumb {
+        background-color: rgb(177, 177, 177);
+        border-radius: 4px;
+      }
+      .sc-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: rgb(220, 220, 220);
+      }
+      .sc-scrollbar::-webkit-scrollbar-thumb:active {
+        background-color: rgb(160, 160, 160);
+      }
+
+      .indexer {
+        border-width: 1px;
+        border-style: solid;
+        border-image: initial;
+        border-color: var(
+          --borderColor-default,
+          var(--color-border-default, #30363d)
+        );
+        border-radius: 6px;
+        contain: paint;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        right: 0px;
+        top: 0px;
+        z-index: 4;
+
+        max-height: calc(100% - 4rem);
+
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans",
+          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        font-size: var(--body-font-size, 14px);
+        line-height: 1.5;
+        color: var(--fgColor-default, var(--color-fg-default));
+
+        color: black;
+        background-color: rgba(255, 255, 255, 0.5);
+
+        position: fixed;
+        top: 3rem;
+        right: 1rem;
+        overflow: auto;
+
+        transition: opacity 33.333ms linear 0s;
+        opacity: 0.5;
+      }
+      .indexer:hover {
+        opacity: 1;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        .indexer {
+          color: white;
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      @media (max-width: 960px) {
+        .indexer {
+          opacity: 0;
+        }
+      }
+
+      .indexer li {
+        list-style: none;
+        cursor: pointer;
+        word-break: keep-all;
+        white-space: nowrap;
+
+        display: flex;
+        padding: 6px 8px;
+        font-size: 14px;
+        line-height: 20px;
+        min-height: 5px;
+        margin-left: 8px;
+        margin-right: 8px;
+        border-radius: 6px;
+        transition: background 33.333ms linear 0s;
+      }
+      .indexer li:hover {
+        background-color: var(
+          --control-transparent-bgColor-hover,
+          var(
+            --color-action-list-item-default-hover-bg,
+            rgba(177, 186, 196, 0.12)
+          )
+        );
+      }
+      .indexer ul {
+        padding: 8px;
+        padding-left: 16px;
+      }
+
+      .indexer-header {
+        display: flex;
+        justify-content: space-evenly;
+        padding: 8px;
+
+        border-bottom: 1px solid
+          var(--borderColor-default, var(--color-border-default, #30363d));
+      }
+      .indexer-header button {
+        color: white;
+        border: none;
+        cursor: pointer;
+        text-decoration: underline;
+
+        background-color: transparent;
+      }
+
+      .markdown-body img {
+        max-width: 768px;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body class="sc-scrollbar">
+    <script type="module">
+      import hljs from "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/+esm";
+      import { markedHighlight } from "https://cdn.jsdelivr.net/npm/marked-highlight@2.1.1/+esm";
+      import { Marked } from "marked";
+
+      const marked = new Marked(
+        markedHighlight({
+          langPrefix: "hljs language-",
+          highlight(code, lang, info) {
+            const language = hljs.getLanguage(lang) ? lang : "plaintext";
+            return hljs.highlight(code, { language }).value;
+          },
+        })
+      );
+
+      // 显示一个列表可以快速跳转到页面的某个位置
+      class Indexer {
+        $box = document.createElement("div");
+        $header = document.createElement("div");
+
+        constructor(container) {
+          /**
+           * @type {HTMLElement}
+           */
+          this.container = container;
+
+          document.body.appendChild(this.$box);
+
+          this.$box.classList.add("indexer");
+          this.$box.classList.add("sc-scrollbar");
+
+          const langs = [
+            {
+              key: "zh",
+              label: "中文",
+            },
+            {
+              key: "en",
+              label: "English",
+            },
+          ];
+          langs.forEach(({ key, label }) => {
+            const $button = document.createElement("button");
+            $button.textContent = label;
+            $button.classList.add("lang-switch");
+            $button.addEventListener("click", () => {
+              const md_url = app.urls[key];
+              app.render(md_url);
+            });
+            this.$header.appendChild($button);
+          });
+          this.$header.classList.add("indexer-header");
+          this.$box.appendChild(this.$header);
+        }
+
+        render() {
+          const all_h_tags = Array.from(
+            this.container.querySelectorAll("h1,h2,h3")
+          );
+
+          const $ul = document.createElement("ul");
+
+          let index_path = [0];
+          all_h_tags.forEach((element, index) => {
+            const is_h1 = element.tagName === "H1";
+            const is_h2 = element.tagName === "H2";
+            const is_h3 = element.tagName === "H3";
+
+            const $li = document.createElement("li");
+            $ul.appendChild($li);
+
+            $li.style.marginLeft = `${is_h1 ? 0 : is_h2 ? 2 : 4}rem`;
+
+            $li.textContent = `${element.textContent}`;
+
+            $li.addEventListener("click", () => {
+              element.scrollIntoView({
+                behavior: "smooth",
+              });
+            });
+          });
+
+          this.$box.innerHTML = "";
+          this.$box.appendChild(this.$header);
+          this.$box.appendChild($ul);
+        }
+      }
+
+      class WelcomeApp {
+        $root = document.createElement("div");
+
+        content = "";
+
+        html_content = "";
+
+        urls = {
+          default:
+            "https://raw.githubusercontent.com/StableCanvas/StableCanvas/main/welcome.en.md",
+          zh: "https://raw.githubusercontent.com/StableCanvas/StableCanvas/main/welcome.cn.md",
+          en: "https://raw.githubusercontent.com/StableCanvas/StableCanvas/main/welcome.en.md",
+        };
+
+        indexer = new Indexer(this.$root);
+
+        constructor() {
+          this.$root.classList.add("markdown-body");
+        }
+
+        cache = {};
+        /**
+         * @param {string} url
+         **/
+        async load(url) {
+          if (this.cache[url]) {
+            this.content = this.cache[url];
+            return this.content;
+          }
+          const resp = await fetch(url);
+          this.content = await resp.text();
+
+          this.cache[url] = this.content;
+          return this.content;
+        }
+
+        mount() {
+          this.$root.innerHTML = this.html_content;
+          document.body.appendChild(this.$root);
+
+          this.indexer.render();
+        }
+
+        parse() {
+          this.html_content = marked.parse(this.content);
+        }
+
+        /**
+         * @type {HTMLLinkElement|null}
+         **/
+        hljs_theme = null;
+        load_dark_hljs_theme() {
+          this.load_hljs_theme(
+            "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css"
+          );
+        }
+        load_light_hljs_theme() {
+          this.load_hljs_theme(
+            "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-light.min.css"
+          );
+        }
+
+        /**
+         * @param {string} url
+         **/
+        load_hljs_theme(url) {
+          this.hljs_theme?.remove();
+          this.hljs_theme = document.createElement("link");
+          this.hljs_theme.href = url;
+          this.hljs_theme.rel = "stylesheet";
+          document.head.appendChild(this.hljs_theme);
+        }
+
+        setup_hljs_theme() {
+          const dark_theme =
+            window.matchMedia(`(prefers-color-scheme: dark)`).matches === true;
+          if (dark_theme) {
+            this.load_dark_hljs_theme();
+          } else {
+            this.load_light_hljs_theme();
+          }
+        }
+
+        redirect_image_src() {
+          const images = this.$root.querySelectorAll("img");
+          images.forEach((img) => {
+            const src = img.getAttribute("src");
+            if (src.startsWith("http://") || src.startsWith("https://")) {
+              return;
+            }
+            const full_src = `https://raw.githubusercontent.com/StableCanvas/StableCanvas/main/${src}`;
+            const link = document.createElement("a");
+            link.href = full_src;
+            link.target = "_blank";
+            img.src = full_src;
+            link.appendChild(img.cloneNode(true));
+            img.replaceWith(link);
+          });
+        }
+
+        /**
+         * @param {string} md_url
+         **/
+        async render(md_url) {
+          await this.load(md_url);
+          this.parse();
+          this.mount();
+          this.redirect_image_src();
+        }
+
+        async setup() {
+          const is_zh = navigator.language.startsWith("zh");
+          const md_url = is_zh ? this.urls.zh : this.urls.en;
+
+          await this.render(md_url);
+
+          this.setup_hljs_theme();
+        }
+      }
+
+      const app = new WelcomeApp();
+
+      app
+        .setup()
+        .then(() => {
+          console.log("[app setup] done");
+        })
+        .catch((err) => {
+          console.error("[app setup] error");
+          console.error(err);
+        });
+    </script>
+  </body>
+</html>

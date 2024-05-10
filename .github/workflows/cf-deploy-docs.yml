@@ -1,11 +1,11 @@
-name: deploy pags/landing
+name: deploy pages/docs
 
 on:
   push:
     branches:
       - "main"
     paths:
-      - "pages/landing/**"
+      - "pages/docs/**"
 
 env:
   IS_CI: 1
@@ -26,5 +26,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ secrets.LANDING_PROJECT_NAME }}
-          directory: pages/landing
+          projectName: ${{ secrets.DOCS_PROJECT_NAME }}
+          directory: pages/docs
