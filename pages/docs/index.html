@@ -164,6 +164,12 @@ https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown.min.css
         max-width: 768px;
         height: auto;
       }
+
+      @media (max-width: 768px) {
+        .markdown-body img {
+          max-width: 100%;
+        }
+      }
     </style>
   </head>
   <body class="sc-scrollbar">
@@ -355,6 +361,24 @@ https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown.min.css
           });
         }
 
+        redirect_a_href() {
+          const anchors = Array.from(this.$root.querySelectorAll("a"));
+          anchors.forEach((a) => {
+            const href = a.getAttribute("href");
+            if (href && href.startsWith("#")) {
+              // a.removeAttribute("href");
+              a.href = "";
+              a.addEventListener("click", (e) => {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                target.scrollIntoView({
+                  behavior: "smooth",
+                });
+              });
+            }
+          });
+        }
+
         /**
          * @param {string} md_url
          **/
@@ -363,6 +387,7 @@ https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown.min.css
           this.parse();
           this.mount();
           this.redirect_image_src();
+          this.redirect_a_href();
         }
 
         async setup() {
