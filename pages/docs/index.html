@@ -425,6 +425,16 @@ https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown.min.css
           });
         }
 
+        set_image_link_target() {
+          const images = this.$root.querySelectorAll("img");
+          images.forEach((img) => {
+            const parent = img.parentElement;
+            if (parent instanceof HTMLAnchorElement) {
+              parent.target = "_blank";
+            }
+          });
+        }
+
         /**
          * @param {string} md_url
          **/
@@ -434,6 +444,7 @@ https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown.min.css
           this.mount();
           this.redirect_image_src();
           this.redirect_a_href();
+          this.set_image_link_target();
         }
 
         async setup() {
