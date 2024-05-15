@@ -6,7 +6,7 @@ on:
     branches:
       - "main"
     paths:
-      - "pages/landing/**"
+      - "pages/**/*"
 
 env:
   IS_CI: 1
