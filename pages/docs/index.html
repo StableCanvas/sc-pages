@@ -88,6 +88,8 @@ https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown.min.css
       }
       .markdown-body {
         padding: 32px 16px;
+
+        min-height: 100vh;
       }
       .sc-scrollbar::-webkit-scrollbar {
         width: 8px;
@@ -325,6 +327,8 @@ https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown.min.css
 
         constructor() {
           this.$root.classList.add("markdown-body");
+          this.$root.innerHTML = "loading...";
+          document.body.appendChild(this.$root);
         }
 
         cache = {};
@@ -345,8 +349,6 @@ https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown.min.css
 
         mount() {
           this.$root.innerHTML = this.html_content;
-          document.body.appendChild(this.$root);
-
           this.indexer.render();
         }
 
