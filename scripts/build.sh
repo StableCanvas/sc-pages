@@ -20,6 +20,7 @@ if [ ! -d "./dist" ]; then
     mkdir dist
 fi
 node $HTML_MINIFY index.html ./dist/index.html
+cp ../sitemap.xml ./dist/sitemap.xml
 
 # build landing
 cd $WORKDIR/pages/landing
@@ -29,5 +30,6 @@ fi
 node $HTML_MINIFY index.html ./dist/index.html
 cp og-image.jpg ./dist/og-image.jpg
 cp twitter-card-image.jpg ./dist/twitter-card-image.jpg
+cp ../sitemap.xml ./dist/sitemap.xml
 
 echo "Build done!"
